@@ -14,6 +14,14 @@ class Posts extends Migration
     public function up()
     {
         //
+                Schema::create('posts', function (Blueprint $table) {
+            $table->integer('id');
+            $table->integer('user_id');
+            $table->string('post', 400);
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
+
+        });
     }
 
     /**
@@ -24,13 +32,7 @@ class Posts extends Migration
     public function down()
     {
         //
-        Schema::create('posts', function (Blueprint $table) {
-            $table->integer('id');
-            $table->integer('user_id');
-            $table->string('post', 255);
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+        Schema::drop('posts');
 
-        });
     }
 }

@@ -25,9 +25,17 @@ Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/register', 'Auth\RegisterController@register');
 Route::post('/register', 'Auth\RegisterController@register');
+// Route::get('/register', function () {
+//     session()->put(['username' => $username]);
+//     return session()->get('username');
+// });
 
 Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
+// Route::get('/added', function () {
+//     session()->put([]);
+// });
+
 
 //ログイン中のページ
 Route::get('/top','PostsController@index');
