@@ -35,10 +35,11 @@ Route::post('/added', 'Auth\RegisterController@added');
 // Route::get('/added', function () {
 //     session()->put([]);
 // });
-Route::get('/logout', 'Auth/LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout');
 
 //ログイン中のページ
 Route::get('/top','PostsController@index');
+Route::post('/top','PostsController@index');
 
 Route::get('/profile','UsersController@profile');
 

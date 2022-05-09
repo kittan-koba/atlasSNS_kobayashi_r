@@ -52,7 +52,10 @@ class LoginController extends Controller
         return view("auth.login");
     }
 
-    protected function loggedOut(){
+    protected function logout(Request $request){
+        Auth::logout();
+        // $this->guard()->logout();
+        // $request->session()->invalidate();
         return redirect('login');
     }
 }
