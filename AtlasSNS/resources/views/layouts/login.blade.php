@@ -23,11 +23,11 @@
     <header>
         <div id = "head">
         <h1><a href= "{{ url('/top') }}"><img src="images/atlas.png"></a></h1>
-            <div id="">
-                <div id="">
+            <div id="accordion" class="accordion-container">
+                <div id="accordion-title js-accordion-title">
                     <p>{{ Auth::user()-> username }}さん<img src="images/arrow.png"></p>
                 <div>
-                <ul>
+                <ul class="accordion-content">
                     <li><a href="/top">ホーム</a></li>
                     <li><a href="/profile">プロフィール</a></li>
                     <li><a href="/logout">ログアウト</a></li>
@@ -46,12 +46,12 @@
                 <p>フォロー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="">フォローリスト</a></p>
+                <p class="btn"><a href="/follow-list">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="">フォロワーリスト</a></p>
+                <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
             <p class="btn"><a href="">ユーザー検索</a></p>
         </div>
