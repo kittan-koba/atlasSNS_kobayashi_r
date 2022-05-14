@@ -24,9 +24,9 @@
         <div id = "head">
         <h1><a href= "{{ url('/top') }}"><img src="images/atlas.png"></a></h1>
             <div id="accordion" class="accordion-container">
-                <div id="accordion-title js-accordion-title">
+                <div class="accordion-title js-accordion-title">
                     <p>{{ Auth::user()-> username }}さん<img src="images/arrow.png"></p>
-                <div>
+                </div>
                 <ul class="accordion-content">
                     <li><a href="/top">ホーム</a></li>
                     <li><a href="/profile">プロフィール</a></li>
@@ -53,20 +53,13 @@
                 </div>
                 <p class="btn"><a href="/follower-list">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="">ユーザー検索</a></p>
+            <p class="btn"><a href="/search">ユーザー検索</a></p>
         </div>
     </div>
     <footer>
     </footer>
-    <script src="{{ asset('js/app.js')}}">$(function () {
-  // タイトルをクリックすると
-  $(".js-accordion-title").on("click", function () {
-    // クリックした次の要素を開閉
-    $(this).next().slideToggle(300);
-    // タイトルにopenクラスを付け外しして矢印の向きを変更
-    $(this).toggleClass("open", 300);
-  });
-});</script>
-    <script src="JavaScriptファイルのURL"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{ asset('js/login.js') }}"></script>
+
 </body>
 </html>
