@@ -39,7 +39,12 @@ Route::get('/logout', 'Auth\LoginController@logout');
 
 //ログイン中のページ
 Route::get('/top','PostsController@index');
-Route::post('/top','PostsController@index');
+// Route::post('/top','PostsController@index');
+// Route::get('/top','PostsController@create');
+Route::post('/top','PostsController@create');
+Route::post('/top','PostsController@update');
+Route::get('/top','PostsController@delete');
+
 
 Route::get('/profile','UsersController@profile');
 
