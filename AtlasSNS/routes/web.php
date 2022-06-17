@@ -53,8 +53,8 @@ Route::get('/post/{id}/delete' , 'PostsController@delete');
 
 Route::get('/profile','UsersController@profile');
 
-Route::get('/search','UsersController@alluser');
-Route::post('/searchresult','UsersController@search');
+Route::get('/search','UsersController@index');
+// Route::post('/search','UsersController@search');
 
 Route::get('/follow-list','PostsController@followlist');
 Route::get('/follower-list','PostsController@followerlist');

@@ -2,17 +2,20 @@
 
 @section('content')
 
-<form action="/searchresult" method="post">
+<form action="/search" method="get">
   @csrf
-  <input type="search" name="search" placeholder="キーワードを入力">
+  <input type="text" name="username" placeholder="キーワードを入力">
   <input type="submit" name="submit" value="検索">
 </form>
-
-@foreach($username as $usernames)
+<div class="search-wrapper">
+              @foreach($users as $user)
                 <div style="padding-left:20px">
-                    <div>{{ $usernames->username }}</div>
-
+                 @if(!empty ($message))
+                    <div>{{ $message }}</div>
+                 @endif
+                    <div>{{ $user->username }}</div>
                 </div>
-@endforeach
+              @endforeach
+</div>
 
 @endsection
