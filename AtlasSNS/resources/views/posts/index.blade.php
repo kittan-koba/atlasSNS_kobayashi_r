@@ -12,19 +12,19 @@
                 @foreach($post as $post)
                 <div style="padding:2rem; border-top: solid 1px #E6ECF0; border-bottom: solid 1px #E6ECF0;">
                     <div>{{ $post->post }}</div>
+
                     <a class="js-modal-open" post="{{ $post->post }}" post_id="{{ $post->id }}"><img src="images/edit.png"></a>
-                    <a class="btn btn-danger" href="<?php echo $post["id"]; ?>" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="images/trash.png"></delete.php?id=>
+                    <a class="btn btn-danger" href="/post/{{ $post->id }}/delete" onclick="return confirm('こちらの投稿を削除してもよろしいでしょうか？')"><img src="images/trash.png"></a>
                 </div>
                 @endforeach
                 <div class="modal js-modal">
                   <div class="modal__bg js-modal-close"></div>
                     <div class="modal__content">
-                      <form action="" method="">
-                        {!! Form::open(['url' => '/top']) !!}
-                        <textarea name="" class="modal_post"></textarea>
-                        <input type="hidden" name="" class="modal_id" value="">
-                        <input type="image" alt="更新" src="images/edit.png">
-                        {!! Form::close() !!}
+                      <form action="/update" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" class="modal_id" value="{{ $post->id }}">
+                        <textarea name="post" class="modal_post"></textarea>
+                        <input type="image" alt="更新" src="images/edit.png" action="/update">
                       </form>
                     </div>
                 </div>

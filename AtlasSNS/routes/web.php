@@ -18,6 +18,11 @@ Route::get('/', function () {
 
 //Auth::routes();
 
+// middleware
+Route::get('/', function (){
+
+})->middleware('web');
+
 
 //ログアウト中のページ
 Route::get('/login', 'Auth\LoginController@login');
@@ -42,13 +47,14 @@ Route::get('/top','PostsController@index');
 // Route::post('/top','PostsController@index');
 // Route::get('/top','PostsController@create');
 Route::post('/top','PostsController@create');
-Route::post('/top','PostsController@update');
-Route::get('/top','PostsController@delete');
+Route::post('/update','PostsController@update');
+Route::get('/post/{id}/delete' , 'PostsController@delete');
 
 
 Route::get('/profile','UsersController@profile');
 
-Route::get('/search','UsersController@search');
+Route::get('/search','UsersController@alluser');
+Route::post('/searchresult','UsersController@search');
 
 Route::get('/follow-list','PostsController@followlist');
 Route::get('/follower-list','PostsController@followerlist');

@@ -26,19 +26,19 @@ class PostsController extends Controller
         return back();
     }
 
-    public function update()
+    public function update(Request $request)
     {
-       $user = auth()->user();
-        $post = $post->update($user->id, $post->id);
 
-        if (!isset($post)) {
-            return redirect('post');
-        }
+        $id = $request->input('id');
+        // dd($id);
+        $post = $request->input('post');
+        \DB::table('posts')
+            ->where('id', $id)
+            ->update(
+                ['post' => $post]
+            );
 
-        return view('posts.index', [
-            'user_id'   => $user,
-            'post' => $post
-        ]);
+        return redirect('top');
     }
       public function delete($id)
     {
@@ -46,6 +46,6 @@ class PostsController extends Controller
             ->where('id', $id)
             ->delete();
 
-        return redirect('post.index');
+        return redirect('top');
     }
 }
