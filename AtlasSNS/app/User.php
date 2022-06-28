@@ -27,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    use HasFactory, Notifiable;
+    use Notifiable;
 
     /**
      * Relationships

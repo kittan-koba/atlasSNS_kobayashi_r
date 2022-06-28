@@ -51,4 +51,9 @@ class UsersController extends Controller
       return view('users.search')->with('message',$message);
       }
 }
+    public function follow(Request $request)
+    {
+      $follow = $request->username;
+      return view('follows.followList');
+    }
 }
