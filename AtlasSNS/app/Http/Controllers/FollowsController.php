@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Auth;
+use App\Post;
 
 class FollowsController extends Controller
 {
     //
-    public function followList(Request $request){
-        $follow = $request->username;
-        return view('follows.followList');
+    public function followList(){
+
+        $follow = User::query()
+                  ->whereIn('id', Auth::user()->follows()->pluck('followed_id'))->get();
+        $post = Post::get();
+        return view('follows.followList' , compact('follow' , 'post'));
+
+        //userテーブルから情報→フォローしている人に絞る
+        //userテーブルの自分のIDがfollowed_idに入っているのみ表示
     }
     //    public function follow(Request $request) {
     //     $follow = User::create([
@@ -27,6 +34,9 @@ class FollowsController extends Controller
     //     return view('follows.followList');
     // }
         public function followerList(){
-        return view('follows.followerList');
+        $follower = User::query()
+                    ->whereIn('id', Auth::user()->followers()->pluck('following_id'))->get();
+        $post = Post::get();
+        return view('follows.followerList' , compact('follower' , 'post'));
     }
 }

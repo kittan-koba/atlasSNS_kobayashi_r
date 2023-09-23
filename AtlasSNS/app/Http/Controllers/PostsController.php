@@ -5,13 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use Auth;
+use App\User;
+use Carbon\Carbon;
 
 class PostsController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
+
+        $post = User::query()->whereIn('id', Auth::user()->follows()->pluck('followed_id'))->orWhere('id', Auth::user()->id)->latest()->get();
         $post = Post::latest()->get();
-        return view('posts.index',compact('post'));
+
+        $followedUserIds = Auth::user()->follows()->pluck('followed_id')->toArray();
+        $followedUserIds[] = Auth::user()->id;
+
+        $posts = Post::whereIn('user_id', $followedUserIds)
+            ->latest()
+            ->get();
+
+        return view('posts.index', compact('post'));
     }
 
     public function create(Request $request)
@@ -40,7 +53,7 @@ class PostsController extends Controller
 
         return redirect('top');
     }
-      public function delete($id)
+    public function delete($id)
     {
         \DB::table('posts')
             ->where('id', $id)
@@ -48,4 +61,6 @@ class PostsController extends Controller
 
         return redirect('top');
     }
+
+
 }

@@ -3,27 +3,56 @@
 @section('content')
 
 <form action="/search" method="get">
-  @csrf
-  <input type="text" name="username" placeholder="キーワードを入力">
-  <input type="submit" name="submit" value="検索">
+  <div class="border_top">
+    @csrf
+    <input type="text" name="username" class="search_area" placeholder="ユーザー名">
+    <button type="submit" name="submit" class="search_btn">
+      <img src="images/search.png"></button>
+  </div>
+  <div class="border_bottoms"></div>
 </form>
+@if(!empty ($message))
+<div>{{ $message }}</div>
+@endif
 <div class="search-wrapper">
-              @foreach($users as $user)
+  @foreach($users as $user)
+  @if ($user->id !== auth()->user()->id)
+  <!-- ログインユーザー以外のユーザーを表示 -->
+  <div style="padding-left:20px">
+    <div class="search_container">
+      <p class="search_username">{{ $user->username }}</p>
+      @if (auth()->user()->isFollowing($user->id))
+      @if ($user->images)
+      <!-- フォローしているユーザーの画像を表示 -->
+      <img src="{{ asset('storage/images/' . $user->images) }}" width="60px" height="60px">
+      @else
+      <img src="{{ asset('images/dawn.png') }}" width="60px" height="60px">
+      @endif
+      <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
 
-                <div style="padding-left:20px">
-                 @if(!empty ($message))
-                    <div>{{ $message }}</div>
-                 @endif
-                    <div>{{ $user->username }}</div>
+        <button type="submit" class="btn btn-remove">フォロー解除</button>
+      </form>
+      @else
+      @if ($user->images)
+      <!-- フォローしていないユーザーの画像を表示 -->
+      <img src="{{ asset('storage/images/' . $user->images) }}" width="60px" height="60px">
+      @else
+      <img src="{{ asset('images/dawn.png') }}" width="60px" height="60px">
+      @endif
+      <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
+        {{ csrf_field() }}
 
-                  <form action="{{ route('follow', ['followed_id' => $user->username]) }}" method="GET">
-                    {{ csrf_field() }}
-                     <button type="submit" class="btn btn-primary">フォローする</button>
-                  </form>
-                    <button type="submit" class="btn btn-success pull-right">フォロー解除</button>
+        <button type="submit" class="btn btn_refollow">フォローする</button>
+      </form>
+      @endif
+    </div>
+  </div>
+  @endif
+  @endforeach
 
-                </div>
-              @endforeach
+
 </div>
 <style></style>
 @endsection

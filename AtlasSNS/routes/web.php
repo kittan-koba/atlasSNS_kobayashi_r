@@ -19,7 +19,7 @@ Route::get('/', function () {
 //Auth::routes();
 
 // middleware
-Route::get('/', function (){
+Route::get('/', function () {
 
 })->middleware('web');
 
@@ -43,20 +43,27 @@ Route::post('/added', 'Auth\RegisterController@added');
 Route::get('/logout', 'Auth\LoginController@logout');
 
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+Route::get('/top', 'PostsController@index');
 // Route::post('/top','PostsController@index');
 // Route::get('/top','PostsController@create');
-Route::post('/top','PostsController@create');
-Route::post('/update','PostsController@update');
-Route::get('/post/{id}/delete' , 'PostsController@delete');
+Route::post('/top', 'PostsController@create');
+Route::post('/update', 'PostsController@update');
+Route::get('/post/{id}/delete', 'PostsController@delete');
 
+Route::post('/updataprofile', 'UsersController@userprofile');
+Route::get('/userprofile', 'UsersController@useredit');
+Route::get('/profile/{id}', 'UsersController@profile');
 
-Route::get('/profile','UsersController@profile');
-
-Route::get('/search','UsersController@index');
+Route::get('/search', 'UsersController@index');
 // Route::post('/search','UsersController@search');
 
-Route::get('/follow-list','FollowsController@followlist');
-Route::get('/follower-list','FollowsController@followerlist');
+Route::get('/follow-list', 'FollowsController@followlist');
+Route::get('/follower-list', 'FollowsController@followerlist');
 
-Route::get('/follow', 'UsersController@follow')->name('follow');
+// Route::post('/follow', 'UsersController@follow')->name('follow');
+Route::post('users/{id}/follow', 'UsersController@follow')->name('follow');
+Route::delete('users/{id}/unfollow', 'UsersController@unfollow')->name('unfollow');
+
+Route::get('/home', function () {
+    return redirect('/top'); // /homeにアクセスされたら/topにリダイレクト
+});
