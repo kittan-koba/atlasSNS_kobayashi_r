@@ -3,17 +3,20 @@
 @section('content')
 
 <form action="/search" method="get">
-  <div class="border_top">
-    @csrf
-    <input type="text" name="username" class="search_area" placeholder="ユーザー名">
-    <button type="submit" name="submit" class="search_btn">
-      <img src="images/search.png"></button>
+  <div class="usersearch_top">
+    <div class="border_top">
+      @csrf
+      <input type="text" name="username" class="search_area" placeholder="ユーザー名">
+      <button type="submit" name="submit" class="search_btn">
+        <img src="images/search.png"></button>
+    </div>
+    @if(!empty ($message))
+    <div class="search_result_message">{{ $message }}</div>
+    @endif
   </div>
   <div class="border_bottoms"></div>
 </form>
-@if(!empty ($message))
-<div>{{ $message }}</div>
-@endif
+
 <div class="search-wrapper">
   @foreach($users as $user)
   @if ($user->id !== auth()->user()->id)

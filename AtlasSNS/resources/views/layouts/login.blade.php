@@ -23,7 +23,7 @@
 <body>
   <header>
     <div id="head">
-      <h1><a href= "{{ url('/top') }}"><img src="images/atlas.png"></a></h1>
+      <h1><a href="{{ url('/top') }}"><img src="{{ asset('images/atlas.png') }}"></a></h1>
       <div>
         <div id="accordion" class="accordion-container">
           <div class="accordion-title js-accordion-title usertitle">

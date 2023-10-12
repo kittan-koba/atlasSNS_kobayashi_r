@@ -13,8 +13,6 @@
     <p>{{ $username->bio }}</p>
   </div>
   @if (auth()->user()->isFollowing($username->id))
-  <div class="">
-  </div>
   <form action="{{ route('unfollow', ['id' => $username->id]) }}" method="POST">
     {{ csrf_field() }}
     {{ method_field('DELETE') }}

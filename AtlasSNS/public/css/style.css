@@ -22,7 +22,7 @@ header{
     margin-top: 30px;
 }
 #side-bar{
-    flex: 0 0 25%;
+    flex: 0 0 23%;
     border-left: 1px solid #727272;
     min-height: 100vh;
 }
@@ -655,4 +655,16 @@ display: flex;
 
 .error p {
     color: #ed3a50;
+}
+
+
+.search_result_message{
+    text-align: right;
+    padding-top: 40px;
+    padding-left: 200px;
+    font-size: 25px;
+}
+
+.usersearch_top{
+    display: flex;
 }

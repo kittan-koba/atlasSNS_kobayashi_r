@@ -97,7 +97,7 @@ class UsersController extends Controller
     if (!empty($keyword_name)) {
       $query = User::query();
       $users = $query->where('username', 'like', '%' . $keyword_name . '%')->get();
-      $message = "「" . $keyword_name . "」を含む名前の検索が完了しました。";
+      $message = "検索ワード：" . $keyword_name;
       //   dd($username);
       return view('users.search')->with([
         'users' => $users,
